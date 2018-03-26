@@ -1,3 +1,4 @@
+"use strict";
 
 import React ,{Component,Fragment} from 'react'
 import autobind from 'autobind-decorator'
@@ -36,12 +37,14 @@ export default class Index extends Component {
   	}
 
 	render() {
-		const {date,isActive} = this.state
+		const {date,isActive} = this.state;
+		const {title} = this.props.initialState;
 		let iconStatus = classNames('icon-arrow',{'on':isActive})
-		 
+	
 		return (
 			<Fragment>
 				<div onClick={this.handleClick} className={iconStatus}></div>
+				<div>{title}</div>
 				<div className="header">Hello Web app !</div>
 				<div className="copy">{date.toLocaleTimeString()}</div>
 			</Fragment>

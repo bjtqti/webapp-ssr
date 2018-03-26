@@ -5,10 +5,13 @@ import ReactDOMServer from 'react-dom/server';
 import Index from '../../client/index/part.jsx';
 
 async function index(ctx,next){
-	let markup = ReactDOMServer.renderToString(<Index/>);
+    let initialState = {
+        title:'欢迎首页'
+    }
+	let markup = ReactDOMServer.renderToString(<Index initialState={initialState} />);
 	await ctx.render('index', {
-        markup:markup,
-        initialState:{code:200}
+        markup,
+        initialState
     })
 }
 

@@ -11,9 +11,9 @@ if (module.hot) {
     module.hot.accept()
 }
 
-const initialState = {};
 window.addEventListener("DOMContentLoaded",()=>{
-  ReactDOM.render(
+	let initialState = JSON.parse(document.getElementById("initial-state").textContent)
+ 	ReactDOM.render(
       <Index initialState={initialState} />,
       document.getElementById('app'))
   

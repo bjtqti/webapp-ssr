@@ -46,9 +46,6 @@ const config = {
 	]
 };
 
-module.exports = config;
-
-
 function _externals() {
     let manifest = require('../package.json');
     let dependencies = manifest.dependencies;
@@ -58,3 +55,6 @@ function _externals() {
     }
     return externals;
 }
+
+module.exports = config;
+
