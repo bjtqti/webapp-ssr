@@ -6,12 +6,13 @@ const NODE_MODULES = path.resolve('node_modules');
 
 const config = {
 	entry: {
-	  	index:['./client/index/index.js','./client/index/index.css']
+	  	index:['./client/index/index.jsx','./client/index/index.css']
 	},
 	output: {
-	    path: path.resolve(__dirname, '../dist'),
+	    path: path.resolve(__dirname, '../dist/client'),
 	    filename: 'js/[name].js',
-	    publicPath:'/'
+	    publicPath:'/',
+	    libraryTarget: 'umd'
 	},
 	module:{
 		rules:[
@@ -50,7 +51,7 @@ const config = {
 		]
 	},
 	plugins: [
-	  new CleanWebpackPlugin('./dist/*.*'),
+	  new CleanWebpackPlugin('./dist/client/'),
 	  new webpack.optimize.CommonsChunkPlugin('common'),
 	  new ExtractTextPlugin({
 	    filename: 'css/[name].css',

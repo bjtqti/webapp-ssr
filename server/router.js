@@ -1,9 +1,11 @@
-const Router = require('koa-router')
-const router = new Router()
-//const {index,error,notFound} = require('./controller/main')
-const {index,error,notFound} = require('../dist/server/app.js')
+"use strict"
 
-router.get("/index", index);
+import Router from 'koa-router'
+import {index,error,notFound} from './controller/main'
+
+const router = new Router()
+  
+router.get("/", index);
 
 router.get("/404", notFound)
 

@@ -1,17 +1,13 @@
 {
-  	"presets": ["env","react"],
-  	"plugins": [
-  		"transform-decorators-legacy",
-  		"transform-class-properties",
-  		"transform-export-extensions",
-  		"transform-object-rest-spread",
-  		"transform-runtime"
-   	],
-   	"env": {
-        "production": {
-            "presets": ["react-optimize"]
-        }
-    }
+    "presets": [
+        "env",
+        "react"
+    ],
+    "plugins": [
+        "transform-decorators-legacy",
+        "transform-class-properties",
+        "transform-object-rest-spread",
+        "transform-export-extensions",
+        "transform-runtime"
+    ]
 }
-
- 

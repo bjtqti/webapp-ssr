@@ -6,13 +6,6 @@ import Index from '../../client/index/part.jsx';
 
 async function index(ctx,next){
 	let markup = ReactDOMServer.renderToString(<Index/>);
-	// let markup = `
-	//     <ul>
-	//       <li><a href="/">首页</a></li>
-	//       <li><a href="/404">/page/404</a></li>
-	//     </ul>
-	// `
-	 
 	await ctx.render('index', {
         markup:markup,
         initialState:{code:200}

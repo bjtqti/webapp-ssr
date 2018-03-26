@@ -1,12 +1,16 @@
+'use strict';
+
 const path = require('path');
-//const webpack = require('webpack');
-//const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
+//const CleanWebpackPlugin = require('clean-webpack-plugin');
 const NODE_MODULES = path.resolve('node_modules');
+
+
+let externals = _externals();
 
 const config = {
 	entry: {
-	  	app:'./server/controller/main.js'
+	  	app:'./app.js'
 	},
 	target:'node',
 	output: {
@@ -23,10 +27,33 @@ const config = {
 		    }
 		]
 	},
+	resolve: {
+        extensions: ['.js','.jsx']
+    },
+	externals: externals,
+	node: {
+		console: false,
+		global: true,
+		process: true,
+		__filename: "mock",
+		__dirname: "mock",
+		Buffer: true,
+		setImmediate: true
+	},
 	plugins: [
-	  new CleanWebpackPlugin('./dist/server/*.*')
-	 // new webpack.optimize.CommonsChunkPlugin('common'),
+	  	//new CleanWebpackPlugin('dist/server')
 	]
 };
 
 module.exports = config;
+
+
+function _externals() {
+    let manifest = require('../package.json');
+    let dependencies = manifest.dependencies;
+    let externals = {};
+    for (let p in dependencies) {
+        externals[p] = 'commonjs ' + p;
+    }
+    return externals;
+}
