@@ -9,8 +9,8 @@
 ## 使用
 
   ```sh
-	npm run build-server 构建服务端的代码
-	npm run build 构建客户端代码
+	npm run release 构建服务端的代码
+	npm run dist 构建客户端代码
 	npm start 启动
   ```
   http://localhost:3000/index 

@@ -42,6 +42,7 @@ const config = {
 	},
 	plugins: [
 	  	//new CleanWebpackPlugin('dist/server')
+	  	new webpack.optimize.UglifyJsPlugin()
 	]
 };
 
