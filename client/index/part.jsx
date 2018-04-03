@@ -16,6 +16,7 @@ export default class Index extends Component {
   	}
 
 	componentDidMount() {
+		console.log(333)
 		this.timerID = setInterval(()=>{
 			this.setState({
 				date:new Date()

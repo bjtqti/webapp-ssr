@@ -5,7 +5,6 @@ import React from 'react'
 import ReactDOM from "react-dom"
 import Index from './part.jsx';
  
- 
 
 if (module.hot) {
     module.hot.accept()

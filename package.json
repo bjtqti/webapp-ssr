@@ -14,11 +14,11 @@
   },
   "homepage": "https://github.com/bjtqti/web-app-boilerplate#readme",
   "scripts": {
-    "start": "NODE_ENV=development node ./app.js",
-    "server":"node ./dist/server/app.js",
+    "start": "NODE_ENV=development nodemon ./app.js localhost 3000",
+    "server": "node ./dist/server/app.js",
     "dist": "webpack --config ./build/webpack.config.js",
     "build-cli": "babel ./server -d ./dist/server",
-    "release":"webpack --config ./build/webpack.server.js",
+    "release": "webpack --config ./build/webpack.server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -26,7 +26,6 @@
     "nodejs"
   ],
   "dependencies": {
-    "autobind-decorator": "^2.1.0",
     "classnames": "^2.2.5",
     "koa": "^2.5.0",
     "koa-logger": "^3.2.0",
@@ -34,12 +33,14 @@
     "koa-static": "^4.0.2",
     "koa-swig": "^2.2.1",
     "koa-views": "^6.1.4",
+    "nodemon": "^1.17.2",
     "normalize.css": "^8.0.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
+    "autobind-decorator": "^2.1.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
