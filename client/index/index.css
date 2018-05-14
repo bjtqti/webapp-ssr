@@ -9,7 +9,7 @@ body {
 #app {
     width 100%;
     font-dpr(14)
-    mutiple-text-overflow(2)
+    
 }
 
 .icon-arrow 
@@ -20,11 +20,18 @@ body {
     transition-duration:300ms
     &.on 
         transform:rotate(90deg)
+
 .header {
-	text-align center
-	font-dpr(14)
+    mutiple-text-overflow()
+    height: 40px;
+	text-align center;
+	font-dpr(14);
+
 }
 
+.title {
+    display: flex;
+}
 .copy {
 	text-align:right;
 	line-height: 1rem;

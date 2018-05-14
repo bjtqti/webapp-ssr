@@ -51,7 +51,9 @@ const config = {
 		]
 	},
 	plugins: [
-	  new CleanWebpackPlugin('./dist/client/'),
+	  	new CleanWebpackPlugin(['dist/client'],{
+			root:path.resolve(__dirname, '..')
+		}),
 	  new webpack.optimize.CommonsChunkPlugin('common'),
 	  new ExtractTextPlugin({
 	    filename: 'css/[name].css',

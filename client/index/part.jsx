@@ -45,7 +45,7 @@ export default class Index extends Component {
 		return (
 			<Fragment>
 				<div onClick={this.handleClick} className={iconStatus}></div>
-				<div>{title}</div>
+				<div className="title">{title}</div>
 				<div className="header">Hello Web app !</div>
 				<div className="copy">{date.toLocaleTimeString()}</div>
 			</Fragment>
