@@ -6,7 +6,7 @@ import Index from '../../client/index/part.jsx';
 
 async function index(ctx,next){
     let initialState = {
-        title:'欢迎首页'
+        title:'来自服务器的数据'
     }
 	let markup = ReactDOMServer.renderToString(<Index initialState={initialState} />);
 	await ctx.render('index', {
