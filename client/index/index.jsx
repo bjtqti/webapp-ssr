@@ -11,14 +11,14 @@ if (module.hot) {
 }
 
 
-function bootstrap(){
+//function bootstrap(){
 	//var initialState = {}
     var initialState = JSON.parse(document.getElementById("initial-state").textContent);
     console.log(initialState)
     ReactDOM.render(<Index initialState={initialState} />,document.getElementById('app'))
-}
+//}
 
-window.addEventListener("DOMContentLoaded",bootstrap);
+//window.addEventListener("DOMContentLoaded",bootstrap);
 	
   
  
