@@ -3,20 +3,29 @@
 import path from 'path'
 import Koa from 'koa'
 import staticServer from 'koa-static'
-import render from 'koa-swig'
-import co from 'co'
+import views from 'koa-views'
 import router from './router'
 
-const app = new Koa()
-const viewPath = path.join(process.cwd(), 'view')
 
-app.use(staticServer(path.join("dist/client")))
-app.context.render = co.wrap(render({
-	root: viewPath,
-	autoescape: true,
-	cache: false, // disable, set to false 
-	ext: 'html'
-}))
+
+const app = new Koa()
+let staticPath = path.join(process.cwd(), 'dist/client')
+//console.log(staticPath)
+ 
+app.use(staticServer(staticPath))
+
+let viewPath = path.join(process.cwd(), 'views')
+ 
+// Must be used before any router is used
+app.use(views(viewPath, {
+	map: {
+	    html: 'swig'
+	},
+	extension:"html"
+}));
+
+
+
 app.use(router.routes())
 app.use(router.allowedMethods())
 

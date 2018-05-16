@@ -2,13 +2,14 @@
 
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import Index from '../../client/index/part.jsx';
+import IndexApp from '../../client/index/part.jsx';
 
 async function index(ctx,next){
     let initialState = {
-        title:'来自服务器的数据'
+        title:'欢迎首页'
     }
-	let markup = ReactDOMServer.renderToString(<Index initialState={initialState} />);
+	let markup = ReactDOMServer.renderToString(<IndexApp initialState={initialState} />);
+    console.log(markup)
 	await ctx.render('index', {
         markup,
         initialState

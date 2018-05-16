@@ -1,6 +1,11 @@
-require("babel-register"); // 开发环境下使用
+if(process.env.NODE_ENV !== 'production'){
+	require('babel-register'); //develop
+}
 
-const app = require('./server/bootstrap')
+console.log(process.env.NODE_ENV)
 
-app.listen(3000);
-console.log('[demo] start-quick is starting at port 3000')
+let app = require(process.env.NODE_ENV === 'production' ? './dist/server/bootstrap' : './server/bootstrap')
+let port = process.env.APP_PORT || 3000
+app.listen(port,()=>{
+	console.log(`server is running at ${port}`)
+});
