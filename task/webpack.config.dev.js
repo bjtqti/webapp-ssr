@@ -53,13 +53,13 @@ const config = {
 	  port: 9000
 	},
 	plugins: [
-		// new CleanWebpackPlugin(['dist/client'],{
-		// 	root:path.resolve(__dirname, '..')
-		// }),
+		new CleanWebpackPlugin(['dist/client'],{
+			root:path.resolve(__dirname, '..')
+		}),
 		new webpack.NamedModulesPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
 	   	new HtmlWebpackPlugin({
-		  	template:'./views/index.html',
+		  	template:'./views/layout.html',
 		  	inject: true,
 		  	minify:false
 		})

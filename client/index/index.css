@@ -36,6 +36,31 @@ body {
     font-dpr(14)
 }
 
+.checkobx-wrap {
+    padding:10px 0;
+}
+.checkbox {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border:2px solid #a6cea6;
+    vertical-align: bottom;
+    margin: 0 10px;
+    border-radius: 2px;
+    box-sizing: border-box;
+}
+
+.checkbox.checked {
+    border: none;
+    background: url(../assets/images/icon_check_on.png) no-repeat;
+    background-size: cover;
+}
+
+.job {
+    margin-top: pxrem(20)
+    justify-content: space-around;
+}
+
 .copy {
     text-align:right;
     line-height: 1rem;

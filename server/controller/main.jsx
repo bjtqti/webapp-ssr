@@ -3,13 +3,15 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import IndexApp from '../../client/index/part.jsx';
+import {menuList} from './mock'
 
 async function index(ctx,next){
+    //console.log(menuList)
     let initialState = {
-        title:'欢迎首页'
+        menuList
     }
 	let markup = ReactDOMServer.renderToString(<IndexApp initialState={initialState} />);
-    console.log(markup)
+    //console.log(markup)
 	await ctx.render('index', {
         markup,
         initialState
