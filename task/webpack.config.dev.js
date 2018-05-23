@@ -1,8 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin'); 
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const NODE_MODULES = path.resolve('node_modules');
+var ip = require('ip');
+
+ // my ip address
 
 const config = {
 	entry: {
@@ -49,13 +52,13 @@ const config = {
 	  compress: true,
 	  open:true,
 	  hot:true,
-	  host:'0.0.0.0',
+	  host:ip.address(),
 	  port: 9000
 	},
 	plugins: [
-		new CleanWebpackPlugin(['dist/client'],{
-			root:path.resolve(__dirname, '..')
-		}),
+		// new CleanWebpackPlugin(['dist/client'],{
+		// 	root:path.resolve(__dirname, '..')
+		// }),
 		new webpack.NamedModulesPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
 	   	new HtmlWebpackPlugin({
