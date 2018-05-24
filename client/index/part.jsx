@@ -1,15 +1,14 @@
 "use strict";
 
 import React ,{Component,Fragment} from 'react'
-
 import {Provider,connect} from "react-redux";
 import {createStore,compose} from "redux";
-
 import autobind from 'autobind-decorator'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import CheckBox from './checkbox.jsx'
 import rootReducer from './reducer.jsx'
+import {TOGGLE_CHECK,TOGGLE_CHECK_ALL} from './constant.jsx'
  
 class Index extends Component {
 	 
@@ -31,33 +30,41 @@ class Index extends Component {
   	}
 
   	componentWillUnmount() {
-    	clearInterval(this.timerID);
+    	//clearInterval(this.timerID);
   	}
 
-  	handleToggle(i,j,checked){
-  		 this.props.dispatch({
-        type:'change',
-        value:[i,j,checked]
-       })
-  			console.log(i,j,checked)
-  	}
-
-    handleToggleAll(i,checked){
-      this.props.dispatch({
-        type:'toggleAll',
-        value:[i,checked]
+    @autobind
+    handleClick(e) {
+      let {isActive} = this.state
+      //clearInterval(this.timerID)
+      this.setState({
+        isActive:!isActive
       })
     }
 
-  	@autobind
-  	handleClick(e) {
-  		let {isActive} = this.state
-  		clearInterval(this.timerID)
-  		this.setState({
-  			isActive:!isActive
-  		})
+    /**
+     * 切换勾选状态
+     */ 
+  	handleToggle(i,j,checked){
+  		 this.props.dispatch({
+        type:TOGGLE_CHECK,
+        value:[i,j,checked]
+       })
   	}
+    
+    /**
+     * 是否全选
+     */
+    handleToggleAll(i,checked){
+      this.props.dispatch({
+        type:TOGGLE_CHECK_ALL,
+        value:[i,checked]
+      })
+    }
   
+    /** 
+     * 渲染菜单项目
+     */
   	renderMenuItem(data,i){
   		var items = data.map((item,j)=>{
         let id = `put-${i}-${j}`;
@@ -75,13 +82,9 @@ class Index extends Component {
   	renderMenuList(menuData) {
       if(menuData && menuData.length){
     		let menuItemList = menuData.map((item,i)=>{
-          let notAllchecked = item.value.some((v)=>{
-            return v.checked !== true
-          });
-          
     			return(
     				<li key={'item-'+i}>
-    					<CheckBox name={item.name} checked={!notAllchecked} onChange={(checked)=>this.handleToggleAll(i,checked)} />
+    					<CheckBox name={item.name} checked={item.checked} onChange={(checked)=>this.handleToggleAll(i,checked)} />
     					{this.renderMenuItem(item.value,i)}
     				</li>
     			)
@@ -96,9 +99,7 @@ class Index extends Component {
   	}
 
 	render() {
-     
 		let {date,isActive} = this.state;
-    //console.log(this.state,this.props)
 		let {menuList} = this.props;
 		let iconStatus = classNames('icon-arrow',{'on':isActive})
 		return (

@@ -14,7 +14,7 @@ export default class CheckBox extends Component {
 	handleChange(){
 		//console.log(this)
 		let {checked} = this.props;
-		this.props.onChange(!!checked);
+		this.props.onChange(!checked); //状态取反
 	}
 
 	render() {
