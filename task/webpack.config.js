@@ -6,6 +6,9 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const NODE_MODULES = path.resolve('node_modules');
 const outputPath = path.resolve(__dirname, '../dist/client');
+
+var InjectHtmlPlugin = require('inject-html-webpack-plugin')
+
 const config = {
 	entry: {
 	  	index:'./client/index/index.jsx'
@@ -58,11 +61,21 @@ const config = {
 	      chunkFilename: "[id].css"
 	    }),
 		new UglifyJSPlugin(),
-	   	new HtmlWebpackPlugin({
-	   		filename:'app.html',
-	  		template:'./views/index.html',
-	  		minify:false
-	    })
+		new InjectHtmlPlugin({
+            filename:'./views/index.html',
+            chunks:['index'],
+            //processor:"http://cdn.example.com",
+            custom:[{
+                start:'<!-- start:bundle-time -->',
+                end:'<!-- end:bundle-time -->',
+                content:Date.now()
+            }]
+        })
+	   	// new HtmlWebpackPlugin({
+	   	// 	filename:'app.html',
+	  		// template:'./views/index.html',
+	  		// minify:false
+	    // })
 	]
 };
 
