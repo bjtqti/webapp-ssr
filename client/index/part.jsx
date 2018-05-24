@@ -3,6 +3,7 @@
 import React ,{Component,Fragment} from 'react'
 import {Provider,connect} from "react-redux";
 import {createStore,compose} from "redux";
+import {fromJS} from 'immutable';
 import autobind from 'autobind-decorator'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
@@ -70,7 +71,7 @@ class Index extends Component {
         let id = `put-${i}-${j}`;
   			return (
   				<li key={`item-${i}-${j}`}>
-            <CheckBox name={item.name} checked={item.checked} onChange={(checked)=>this.handleToggle(i,j,checked)} />
+            <CheckBox name={item.get('name')} checked={item.get('checked')} onChange={(checked)=>this.handleToggle(i,j,checked)} />
   				</li>
   			)
   		})
@@ -80,12 +81,12 @@ class Index extends Component {
   	}
 
   	renderMenuList(menuData) {
-      if(menuData && menuData.length){
+      if(!menuData.isEmpty()){
     		let menuItemList = menuData.map((item,i)=>{
     			return(
     				<li key={'item-'+i}>
-    					<CheckBox name={item.name} checked={item.checked} onChange={(checked)=>this.handleToggleAll(i,checked)} />
-    					{this.renderMenuItem(item.value,i)}
+    					<CheckBox name={item.get('name')} checked={item.get('checked')} onChange={(checked)=>this.handleToggleAll(i,checked)} />
+    					{this.renderMenuItem(item.get('value'),i)}
     				</li>
     			)
     		})
@@ -101,6 +102,7 @@ class Index extends Component {
 	render() {
 		let {date,isActive} = this.state;
 		let {menuList} = this.props;
+    //console.log(menuList)
 		let iconStatus = classNames('icon-arrow',{'on':isActive})
 		return (
 			<Fragment>
@@ -149,7 +151,7 @@ export default class IndexApp extends Component{
         const {menuList} = this.props.initialState;
         //console.log(this.props)
         const initialState = {
-            menuList
+            menuList:fromJS(menuList)
         };
 
         var store = configureStore(initialState);
