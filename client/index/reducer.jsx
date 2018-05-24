@@ -1,6 +1,6 @@
 'use strict'
 
-import {TOGGLE_CHECK,TOGGLE_CHECK_ALL} from './constant.jsx'
+import {TOGGLE_CHECK,TOGGLE_CHECK_ALL,CLEAR_ALL} from './constant.jsx'
 
 function rootReducer(state={},action){
   
@@ -45,6 +45,14 @@ function rootReducer(state={},action){
           // return Object.assign({},state,{
           //     menuList:_menu
           // });;
+        case CLEAR_ALL:
+          var menuList = state.menuList.map(list=>{
+            return list.set('checked',false).updateIn(['value'],list=>{
+              return list.map(v=>v.set('checked',false))
+            });
+          })
+         // console.log(menuList)
+          return Object.assign({},state,{menuList:menuList})
         default:
             return state;
     }

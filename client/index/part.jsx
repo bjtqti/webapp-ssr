@@ -9,7 +9,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import CheckBox from './checkbox.jsx'
 import rootReducer from './reducer.jsx'
-import {TOGGLE_CHECK,TOGGLE_CHECK_ALL} from './constant.jsx'
+import {TOGGLE_CHECK,TOGGLE_CHECK_ALL,CLEAR_ALL} from './constant.jsx'
  
 class Index extends Component {
 	 
@@ -62,6 +62,17 @@ class Index extends Component {
         value:[i,checked]
       })
     }
+
+    /**
+     * 清除全选中
+     */
+    @autobind
+    handleClearAll(){
+      this.props.dispatch({
+        type:CLEAR_ALL,
+        value:[]
+      })
+    }
   
     /** 
      * 渲染菜单项目
@@ -112,7 +123,7 @@ class Index extends Component {
 				<div className="menu">
 					<div className="flexbox job">
 						<div className="job">职位</div>
-						<div className="clear">清除</div>
+						<div className="clear" onClick={this.handleClearAll}>清除</div>
 					</div>
 					<div className="menu-list">
             {this.renderMenuList(menuList)}
