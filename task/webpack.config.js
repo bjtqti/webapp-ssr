@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 //const HtmlWebpackPlugin = require('html-webpack-plugin'); 
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
@@ -51,6 +51,16 @@ const config = {
 		    }
 		]
 	},
+	optimization: {
+	    minimizer: [
+	      new UglifyJSPlugin({
+	        cache: true,
+	        parallel: true,
+	        sourceMap: true // set to true if you want JS source maps
+	      }),
+	      new OptimizeCSSAssetsPlugin({})
+	    ]
+	},
 	plugins: [
 		new CleanWebpackPlugin(['dist/client'],{
 			root:path.resolve(__dirname, '..')
@@ -61,15 +71,15 @@ const config = {
 	      filename: "css/[name]-[hash:8].css",
 	      chunkFilename: "[id].css"
 	    }),
-		new UglifyJSPlugin({
-			exclude:[NODE_MODULES]
-		}),
-		new OptimizeCssAssetsPlugin({
-		      //assetNameRegExp: /\.optimize\.css$/g,
-		      //cssProcessor: require('cssnano'),
-		      cssProcessorOptions: { discardComments: { removeAll: true } },
-		      canPrint: true
-		    }),
+		// new UglifyJSPlugin({
+		// 	exclude:[NODE_MODULES]
+		// }),
+		// new OptimizeCSSAssetsPlugin({
+		//       //assetNameRegExp: /\.optimize\.css$/g,
+		//       //cssProcessor: require('cssnano'),
+		//       cssProcessorOptions: { discardComments: { removeAll: true } },
+		//       canPrint: true
+		//     }),
 		new InjectHtmlPlugin({
             filename:'./views/index.html',
             chunks:['index']
