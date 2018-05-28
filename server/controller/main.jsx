@@ -2,11 +2,11 @@
 
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import IndexApp from '../../client/index/part.jsx';
+import IndexApp from '../../client/index/app.jsx';
 import {menuList} from './mock'
 
 async function index(ctx,next){
-    //console.log(menuList)
+    console.log(menuList)
     let initialState = {
         menuList
     }

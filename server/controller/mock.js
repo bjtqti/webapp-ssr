@@ -6,7 +6,7 @@ module.exports = {
             name: 'IOS开发'
         }, {
             name: 'Android开发',
-            checked:false
+            checked:true
         }, {
             name: '前端开发',
             checked: true

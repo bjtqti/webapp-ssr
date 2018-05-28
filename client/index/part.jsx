@@ -1,119 +1,119 @@
 "use strict";
 
 import React ,{Component,Fragment} from 'react'
-import {Provider,connect} from "react-redux";
-import {createStore,compose} from "redux";
-import {fromJS} from 'immutable';
 import autobind from 'autobind-decorator'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import axios from 'axios'
+import {fetchCheckboxStatus,toggleAll,clearAll} from './action.js'
+import Loading from '../component/loading.jsx'
 import CheckBox from './checkbox.jsx'
-import rootReducer from './reducer.jsx'
-import {TOGGLE_CHECK,TOGGLE_CHECK_ALL,CLEAR_ALL} from './constant.jsx'
- 
-class Index extends Component {
+
+export default class Index extends Component {
 	 
 	constructor(props) {
-    	super(props);
-    	this.state = {
-    		date: new Date(),
-    		isActive:false
-    	};
-  	}
+  	super(props);
+  	this.state = {
+  		date: new Date(),
+  		isActive:false
+  	};
+	}
 
 	componentDidMount() {
 		//console.log(333)
-		// this.timerID = setInterval(()=>{
-		// 	this.setState({
-		// 		date:new Date()
-		// 	})
-		// },1000)
-  	}
+	// this.timerID = setInterval(()=>{
+	// 	this.setState({
+	// 		date:new Date()
+	// 	})
+	// },1000)
+	}
 
-  	componentWillUnmount() {
-    	//clearInterval(this.timerID);
-  	}
+	componentWillUnmount() {
+  	//clearInterval(this.timerID);
+	}
 
-    @autobind
-    handleClick(e) {
-      let {isActive} = this.state
-      //clearInterval(this.timerID)
-      this.setState({
-        isActive:!isActive
-      })
-    }
+  @autobind
+  handleClick(e) {
+    let {isActive} = this.state
+    //clearInterval(this.timerID)
+    this.setState({
+      isActive:!isActive
+    })
+  }
 
-    /**
-     * 切换勾选状态
-     */ 
-  	handleToggle(i,j,checked){
-  		 this.props.dispatch({
-        type:TOGGLE_CHECK,
-        value:[i,j,checked]
-       })
-  	}
-    
-    /**
-     * 是否全选
-     */
-    handleToggleAll(i,checked){
-      this.props.dispatch({
-        type:TOGGLE_CHECK_ALL,
-        value:[i,checked]
-      })
-    }
+  /**
+   * 切换勾选状态
+   */ 
+	handleToggle(i,j,checked){
+		 // this.props.dispatch({
+   //    type:TOGGLE_CHECK,
+   //    value:[i,j,checked]
+   //   })
 
-    /**
-     * 清除全选中
-     */
-    @autobind
-    handleClearAll(){
-      this.props.dispatch({
-        type:CLEAR_ALL,
-        value:[]
-      })
-    }
+   let {dispatch,isFetching}  = this.props;
+   //console.log(isFetching)
+   if(isFetching) {
+    return false;
+   }
+   dispatch(fetchCheckboxStatus({
+    i,j,checked
+   }))
+	}
   
-    /** 
-     * 渲染菜单项目
-     */
-  	renderMenuItem(data,i){
-  		var items = data.map((item,j)=>{
-        let id = `put-${i}-${j}`;
-  			return (
-  				<li key={`item-${i}-${j}`}>
-            <CheckBox name={item.get('name')} checked={item.get('checked')} onChange={(checked)=>this.handleToggle(i,j,checked)} />
+  /**
+   * 是否全选
+   */
+  handleToggleAll(i,checked){
+    this.props.dispatch(toggleAll(i,checked))
+  }
+
+  /**
+   * 清除全选中
+   */
+  @autobind
+  handleClearAll(){
+    this.props.dispatch(clearAll())
+  }
+
+  /** 
+   * 渲染菜单项目
+   */
+	renderMenuItem(data,i){
+		var items = data.map((item,j)=>{
+      let id = `put-${i}-${j}`;
+			return (
+				<li key={`item-${i}-${j}`}>
+          <CheckBox name={item.get('name')} checked={item.get('checked')} onChange={(checked)=>this.handleToggle(i,j,checked)} />
+				</li>
+			)
+		})
+		return (
+			<ul key={`item-${i}`}>{items}</ul>
+		)
+	}
+
+	renderMenuList(menuData) {
+    if(menuData && !menuData.isEmpty()){
+  		let menuItemList = menuData.map((item,i)=>{
+  			return(
+  				<li key={'item-'+i}>
+  					<CheckBox name={item.get('name')} checked={item.get('checked')} onChange={(checked)=>this.handleToggleAll(i,checked)} />
+  					{this.renderMenuItem(item.get('value'),i)}
   				</li>
   			)
   		})
-  		return (
-  			<ul key={`item-${i}`}>{items}</ul>
+  		return(
+  			<ul>
+  				{menuItemList}
+  			</ul>
   		)
-  	}
-
-  	renderMenuList(menuData) {
-      if(!menuData.isEmpty()){
-    		let menuItemList = menuData.map((item,i)=>{
-    			return(
-    				<li key={'item-'+i}>
-    					<CheckBox name={item.get('name')} checked={item.get('checked')} onChange={(checked)=>this.handleToggleAll(i,checked)} />
-    					{this.renderMenuItem(item.get('value'),i)}
-    				</li>
-    			)
-    		})
-    		return(
-    			<ul>
-    				{menuItemList}
-    			</ul>
-    		)
-      }
-      return 'DATA_ERROR'
-  	}
+    }
+    return 'DATA_ERROR'
+	}
 
 	render() {
 		let {date,isActive} = this.state;
-		let {menuList} = this.props;
-    //console.log(menuList)
+		let {menuList,isFetching} = this.props;
 		let iconStatus = classNames('icon-arrow',{'on':isActive})
 		return (
 			<Fragment>
@@ -129,6 +129,7 @@ class Index extends Component {
             {this.renderMenuList(menuList)}
 					</div>
 				</div>
+        <Loading isActive={isFetching} />
 			</Fragment>
 		)
 	}
@@ -139,38 +140,4 @@ Index.propTypes = {
   initialState: PropTypes.object
 }
 
-function selector(state){
-  //console.log(state)
-    const {menuList} = state
-    return {
-      menuList
-    };
-}
-
-let IndexConnected = connect(selector)(Index);
-
-
  
-function configureStore(initialState){
-    const store = createStore(rootReducer, initialState)
-    return store
-}
-
- 
-export default class IndexApp extends Component{
-    render(){
-        const {menuList} = this.props.initialState;
-        //console.log(this.props)
-        const initialState = {
-            menuList:fromJS(menuList)
-        };
-
-        var store = configureStore(initialState);
-
-        return (
-            <Provider store={store}>
-              <IndexConnected />
-            </Provider>
-        )
-    }
-}

@@ -51,6 +51,9 @@ const config = {
 		    }
 		]
 	},
+	resolve: {
+        extensions: ['.js','.jsx']
+    },
 	optimization: {
 	    minimizer: [
 	      new UglifyJSPlugin({

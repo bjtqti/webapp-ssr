@@ -1,9 +1,10 @@
 "use strict";
 
 import "./index.css"
+import '../component/loading.css'
 import React from 'react'
 import ReactDOM from "react-dom"
-import IndexApp from './part.jsx';
+import IndexApp from './app.jsx';
  
 
 if (module.hot) {
