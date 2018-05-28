@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin'); 
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+//const HtmlWebpackPlugin = require('html-webpack-plugin'); 
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -60,16 +61,24 @@ const config = {
 	      filename: "css/[name]-[hash:8].css",
 	      chunkFilename: "[id].css"
 	    }),
-		new UglifyJSPlugin(),
+		new UglifyJSPlugin({
+			exclude:[NODE_MODULES]
+		}),
+		new OptimizeCssAssetsPlugin({
+		      //assetNameRegExp: /\.optimize\.css$/g,
+		      //cssProcessor: require('cssnano'),
+		      cssProcessorOptions: { discardComments: { removeAll: true } },
+		      canPrint: true
+		    }),
 		new InjectHtmlPlugin({
             filename:'./views/index.html',
-            chunks:['index'],
-            //processor:"http://cdn.example.com",
-            custom:[{
-                start:'<!-- start:bundle-time -->',
-                end:'<!-- end:bundle-time -->',
-                content:Date.now()
-            }]
+            chunks:['index']
+            //,processor:"http://cdn.example.com",
+            // custom:[{
+            //     start:'<!-- start:bundle-time -->',
+            //     end:'<!-- end:bundle-time -->',
+            //     content:Date.now()
+            // }]
         })
 	   	// new HtmlWebpackPlugin({
 	   	// 	filename:'app.html',

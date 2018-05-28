@@ -5,7 +5,7 @@
   "repository": "git+ssh://git@github.com/bjtqti/web-app-boilerplate.git",
   "scripts": {
     "start": "webpack-dev-server --config ./task/webpack.config.dev.js",
-    "server": "NODE_ENV=production nodemon app.js",
+    "server": "NODE_ENV=test nodemon app.js",
     "dist:client": "webpack --config ./task/webpack.config.js",
     "dist:server": "webpack --config ./task/webpack.config.server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -45,6 +45,7 @@
     "html-webpack-plugin": "^3.2.0",
     "ip": "^1.1.5",
     "mini-css-extract-plugin": "^0.4.0",
+    "optimize-css-assets-webpack-plugin": "^4.0.2",
     "postcss-loader": "^2.1.5",
     "style-loader": "^0.21.0",
     "stylus": "^0.54.5",

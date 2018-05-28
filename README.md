@@ -3,18 +3,17 @@
 ## 安装 
   使用yarn 或 npm 安装
   ```sh
-	 npm install 或 yarn install
+   npm install 或 yarn install
   ```
 
 ## 使用
 
   ```sh
-	npm start 开启webpack-dev-server服务器
-	npm run server 开启同构服务器
-	npm run dist:client 构建客户端代码
+  npm start 开启webpack-dev-server服务器
+  npm run server 开启同构服务器
+  npm run dist:client 构建客户端代码
   npm run dist:server 构建服务端代码
   ```
-  http://localhost:3000/ 
 
 ## 说明
   node 环境基于v8.10.1, koa@2.5.1 , webpack基于v4.8.1
