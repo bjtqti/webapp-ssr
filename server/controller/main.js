@@ -1,16 +1,15 @@
 'use strict';
 
-import React from 'react';
-import ReactDOMServer from 'react-dom/server';
-import IndexApp from '../../client/index/app.jsx';
-import {menuList} from './mock'
+let {menuList} = require('./mock')
+let {markupOfComponent} = require('./render.jsx')
+
 
 async function index(ctx,next){
-    console.log(menuList)
+    //console.log(menuList)
     let initialState = {
         menuList
     }
-	let markup = ReactDOMServer.renderToString(<IndexApp initialState={initialState} />);
+	let markup = markupOfComponent('index',initialState)
     //console.log(markup)
 	await ctx.render('index', {
         markup,
@@ -31,6 +30,10 @@ async function error(ctx,next){
         markup:'<h1>内部错误</h1>',
         initialState:{code:500}
     })
+}
+
+async function checkStatus(ctx,next){
+    
 }
 
 module.exports = {

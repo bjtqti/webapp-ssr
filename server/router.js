@@ -1,7 +1,7 @@
 "use strict"
 
-import Router from 'koa-router'
-import {index,error,notFound} from './controller/main.jsx'
+let Router = require('koa-router')
+let {index,error,notFound} = require('./controller/main.js')
 
 const router = new Router()
   

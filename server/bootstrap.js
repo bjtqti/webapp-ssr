@@ -1,29 +1,23 @@
 "use strict";
 
-import path from 'path'
-import Koa from 'koa'
-import staticServer from 'koa-static'
-import views from 'koa-views'
-import router from './router'
+ 
+let { join, resolve } = require('path')
+let Koa = require('koa')
+let serveStatic = require('koa-static')
+let views = require('koa-views')
+let router = require('./router')
 
 
 
 const app = new Koa()
-let staticPath = path.join(process.cwd(), 'dist/client')
+ 
+
+app.use(serveStatic(join('dist', 'client')))
 //console.log(staticPath)
  
-app.use(staticServer(staticPath))
-
-let viewPath = path.join(process.cwd(), 'views')
- 
-// Must be used before any router is used
-app.use(views(viewPath, {
-	map: {
-	    html: 'swig'
-	},
-	extension:"html"
-}));
-
+app.use(
+	views(resolve('server', 'views'), { map: { html: 'swig' }, extension: 'html' })
+)
 
 
 app.use(router.routes())

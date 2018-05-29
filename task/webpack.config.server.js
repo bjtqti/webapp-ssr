@@ -16,10 +16,12 @@ function _externals() {
 let externals = _externals();
 
 const config = {
-	entry:'./server/bootstrap.js',
+	entry:{
+		index:'./server/controller/render.jsx'
+	},
 	output: {
 	    path: outputPath,
-	    filename: 'bootstrap.js',
+	    filename: '.js',
 	    libraryTarget: 'commonjs2'
 	},
 	target:'node',

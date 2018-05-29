@@ -65,7 +65,7 @@ const config = {
 		new webpack.NamedModulesPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
 	   	new HtmlWebpackPlugin({
-		  	template:'./views/layout.html',
+		  	template:'./server/views/layout.html',
 		  	inject: true,
 		  	minify:false
 		})

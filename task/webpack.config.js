@@ -84,7 +84,7 @@ const config = {
 		//       canPrint: true
 		//     }),
 		new InjectHtmlPlugin({
-            filename:'./views/index.html',
+            filename:'./server/views/index.html',
             chunks:['index']
             //,processor:"http://cdn.example.com",
             // custom:[{
