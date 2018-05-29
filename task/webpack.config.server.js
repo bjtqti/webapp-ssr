@@ -17,11 +17,11 @@ let externals = _externals();
 
 const config = {
 	entry:{
-		index:'./server/controller/render.jsx'
+		index:'./client/index/app-server.jsx'
 	},
 	output: {
 	    path: outputPath,
-	    filename: '.js',
+	    filename: '[name].js',
 	    libraryTarget: 'commonjs2'
 	},
 	target:'node',

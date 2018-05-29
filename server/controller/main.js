@@ -1,7 +1,7 @@
 'use strict';
 
 let {menuList} = require('./mock')
-let {markupOfComponent} = require('./render.jsx')
+let {markupOfComponent} = require('../lib/util.js')
 
 
 async function index(ctx,next){
@@ -9,12 +9,13 @@ async function index(ctx,next){
     let initialState = {
         menuList
     }
-	let markup = markupOfComponent('index',initialState)
-    //console.log(markup)
-	await ctx.render('index', {
+	let markup = markupOfComponent('index', initialState)
+   // console.log(markup)
+    await ctx.render('index', {
         markup,
         initialState
     })
+
 }
 
 async function notFound(ctx,next){
