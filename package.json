@@ -21,6 +21,8 @@
     "immutable": "^3.8.2",
     "inject-html-webpack-plugin": "0.0.39",
     "koa": "^2.5.1",
+    "koa-body": "^2.6.0",
+    "koa-methodoverride": "^2.0.0",
     "koa-router": "^7.4.0",
     "koa-static": "^4.0.2",
     "koa-swig": "^2.2.1",

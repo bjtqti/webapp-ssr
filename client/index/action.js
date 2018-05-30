@@ -1,7 +1,7 @@
 "use strict"
 
 import {TOGGLE_CHECK_END,TOGGLE_CHECK_START,TOGGLE_CHECK_ALL,CLEAR_ALL} from './constant.jsx'
-
+import axios from 'axios'
 function startCheckStatus(){
   return {
     type:TOGGLE_CHECK_START
@@ -18,14 +18,13 @@ function finshCheckStatus(param){
 
 export function fetchCheckboxStatus(param){
   return function(dispatch){
-    // axios.get('/').then((res)=>{
-    //   dispatch(finshCheckStatus(param))
-    // })
     dispatch(startCheckStatus());
-    setTimeout(()=>{
-      //console.log(param)
+    axios.get('http://localhost:3000/api',{
+      name:'frog'
+    }).then((res)=>{
+      console.log(res)
       dispatch(finshCheckStatus(param))
-    },1000)
+    })
   }
 }
 

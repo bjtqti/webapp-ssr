@@ -25,6 +25,26 @@ async function notFound(ctx,next){
     })
 }
 
+
+async function getUserPost(ctx,next){
+    console.log(ctx.request.body)
+    ctx.res.setHeader('Access-Control-Allow-Origin', '*')
+    ctx.res.setHeader(
+        'Access-Control-Allow-Methods',
+        'GET,PUT,POST,DELETE,OPTIONS'
+    )
+    ctx.res.setHeader(
+        'Access-Control-Allow-Headers',
+        'Content-Type, Authorization, Content-Length, X-Requested-With, Accept, x-csrf-token, origin'
+    )
+
+    ctx.body = {
+      
+        message:'hello'
+    }
+     
+}
+
  
 async function error(ctx,next){
 	await ctx.render('error', {
@@ -40,5 +60,6 @@ async function checkStatus(ctx,next){
 module.exports = {
 	index:index,
 	notFound:notFound,
-	error:error
+	error:error,
+    getUserPost:getUserPost
 }
