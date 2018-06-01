@@ -93,11 +93,6 @@ const config = {
             //     content:Date.now()
             // }]
         })
-	   	// new HtmlWebpackPlugin({
-	   	// 	filename:'app.html',
-	  		// template:'./views/index.html',
-	  		// minify:false
-	    // })
 	]
 };
 

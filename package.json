@@ -5,7 +5,7 @@
   "repository": "git+ssh://git@github.com/bjtqti/web-app-boilerplate.git",
   "scripts": {
     "start": "webpack-dev-server --config ./task/webpack.config.dev.js",
-    "server": "NODE_ENV=test nodemon app.js",
+    "server": "NODE_ENV=production nodemon app.js",
     "dist:client": "webpack --config ./task/webpack.config.js",
     "dist:server": "webpack --config ./task/webpack.config.server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
