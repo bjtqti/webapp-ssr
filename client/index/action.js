@@ -24,6 +24,8 @@ export function fetchCheckboxStatus(param){
     }).then((res)=>{
       console.log(res)
       dispatch(finshCheckStatus(param))
+    }).catch((err)=>{
+      dispatch(finshCheckStatus(param))
     })
   }
 }

@@ -7,18 +7,8 @@ import Index from './part.jsx'
 import createStoreWithMiddleware from '../utils/helper.js'
 import rootReducer from './reducer.jsx'
 
- 
-function selector(state){
-  //console.log(state)
-    const {menuList,isFetching,isFetched} = state
-    return {
-      menuList,isFetching,isFetched
-    };
-}
+let IndexConnected = connect(state => state)(Index);
 
-let IndexConnected = connect(selector)(Index);
-
- 
 class IndexApp extends Component{
     render(){
         const {menuList} = this.props.initialState;

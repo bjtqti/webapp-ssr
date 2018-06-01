@@ -21,7 +21,7 @@ if (module.hot) {
 //window.addEventListener("DOMContentLoaded",function(){
 	var initialState =JSON.parse(document.getElementById("initial-state").textContent);
 	//console.log(initialState)
-	ReactDOM.render(<IndexApp initialState={initialState} />,document.getElementById('app'))
+	ReactDOM.hydrate(<IndexApp initialState={initialState} />,document.getElementById('app'))
 //});
 	
   

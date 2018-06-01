@@ -21,21 +21,21 @@ export default class Index extends Component {
 
 	componentDidMount() {
 		//console.log(333)
-	// this.timerID = setInterval(()=>{
-	// 	this.setState({
-	// 		date:new Date()
-	// 	})
-	// },1000)
+  	this.timerID = setInterval(()=>{
+  		this.setState({
+  			date:new Date()
+  		})
+  	},1000)
 	}
 
 	componentWillUnmount() {
-  	//clearInterval(this.timerID);
+  	clearInterval(this.timerID);
 	}
 
   @autobind
   handleClick(e) {
     let {isActive} = this.state
-    //clearInterval(this.timerID)
+    clearInterval(this.timerID)
     this.setState({
       isActive:!isActive
     })
@@ -45,11 +45,7 @@ export default class Index extends Component {
    * 切换勾选状态
    */ 
 	handleToggle(i,j,checked){
-		 // this.props.dispatch({
-   //    type:TOGGLE_CHECK,
-   //    value:[i,j,checked]
-   //   })
-
+ 
    let {dispatch,isFetching}  = this.props;
    //console.log(isFetching)
    if(isFetching) {

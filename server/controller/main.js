@@ -10,7 +10,7 @@ async function index(ctx,next){
         menuList
     }
 	let markup = markupOfComponent('index', initialState)
-   // console.log(markup)
+    //console.log(markup)
     await ctx.render('index', {
         markup,
         initialState
@@ -53,10 +53,7 @@ async function error(ctx,next){
     })
 }
 
-async function checkStatus(ctx,next){
-    
-}
-
+ 
 module.exports = {
 	index:index,
 	notFound:notFound,
